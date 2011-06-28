@@ -13,11 +13,48 @@ namespace ExpressionMapper
 	/// </summary>
 	public static class Mapper
 	{
-		enum MappedMembers
+		private enum MappedMembers
 		{
 			AllFields,
 			PublicMembers,
 			PublicMembersWithFlattering
+		}
+
+		private static IEnumerable<MappingExpressionGenerator> Generators
+		{
+			get
+			{
+				return generators ?? (generators = new[]
+				{
+					ExpressionMapper.Generators.Generators.ToNullable(),
+					ExpressionMapper.Generators.Generators.FromNullable(),
+					ExpressionMapper.Generators.Generators.Assignable(),
+					ExpressionMapper.Generators.Generators.UseConvertClass(),
+					ExpressionMapper.Generators.Generators.UseIConvertible(),
+					ExpressionMapper.Generators.Generators.ArrayToArray(Aggregate),
+					ExpressionMapper.Generators.Generators.ListToList(Aggregate),
+					ExpressionMapper.Generators.Generators.ComplexToComplex(Aggregate, MemberExtractors[MappedMembers.PublicMembersWithFlattering])
+				});
+			}
+		}
+
+		private static IEnumerable<MappingExpressionGenerator> generators;
+
+		private static readonly MappingExpressionGenerator Aggregate;
+
+		private static readonly Dictionary<MappedMembers, IMemberExtractor> MemberExtractors;
+
+		static Mapper()
+		{
+			Aggregate = (fromExpr, to, customMapping) => 
+				Generators.Select(f => f(fromExpr, to, customMapping)).FirstOrDefault(e => e != null);
+
+			MemberExtractors = new Dictionary<MappedMembers, IMemberExtractor>
+				{
+						{MappedMembers.AllFields, new AllFieldsExtractor()},
+						{MappedMembers.PublicMembers, new PublicMembersExtractor()},
+						{MappedMembers.PublicMembersWithFlattering, new PublicMembersWithFlatteringExtractor()},
+				};
 		}
 
 		/// <summary>
@@ -42,36 +79,5 @@ namespace ExpressionMapper
 		{
 			return Aggregate.GetMapper(customMapping);
 		}
-
-		private static IEnumerable<MappingExpressionGenerator> Generators
-		{
-			get
-			{
-				return generators ?? (generators = new[]
-				{
-					ExpressionMapper.Generators.Generators.ToNullable(),
-					ExpressionMapper.Generators.Generators.FromNullable(),
-					ExpressionMapper.Generators.Generators.Assignable(),
-					ExpressionMapper.Generators.Generators.UseConvertClass(),
-					ExpressionMapper.Generators.Generators.UseIConvertible(),
-					ExpressionMapper.Generators.Generators.ArrayToArray(Aggregate),
-					ExpressionMapper.Generators.Generators.ListToList(Aggregate),
-					ExpressionMapper.Generators.Generators.ComplexToComplex(Aggregate, MemberExtractors[MappedMembers.PublicMembersWithFlattering])
-				});
-			}
-		}
-
-		private static IEnumerable<MappingExpressionGenerator> generators;
-
-		private static readonly MappingExpressionGenerator Aggregate =
-				(fromExpr, to, customMapping) => Generators.Select(f => f(fromExpr, to, customMapping)).FirstOrDefault(e => e != null);
-
-		private static readonly Dictionary<MappedMembers, IMemberExtractor> MemberExtractors =
-			new Dictionary<MappedMembers, IMemberExtractor>
-			{
-					{MappedMembers.AllFields, new AllFieldsExtractor()},
-					{MappedMembers.PublicMembers, new PublicMembersExtractor()},
-					{MappedMembers.PublicMembersWithFlattering, new PublicMembersWithFlatteringExtractor()},
-			};
 	}
 }
