@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ILMerge", "ILMerge", "{214096D8-D5D7-457F-BBB1-B8091F2B8F0C}"
+	ProjectSection(SolutionItems) = preProject
+		ILMerge\ILMerge License.rtf = ILMerge\ILMerge License.rtf
+		ILMerge\ILMerge.doc = ILMerge\ILMerge.doc
+		ILMerge\ILMerge.exe = ILMerge\ILMerge.exe
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionMapper", "ExpressionMapper\ExpressionMapper.csproj", "{0D193B55-28EF-409C-8573-4A4B6E4ACA4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionMapper.Tests", "ExpressionMapper.Tests\ExpressionMapper.Tests.csproj", "{A6F607AE-0326-4A1D-8851-7414C249EA3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQToolkit", "IQToolkit\IQToolkit.csproj", "{0DA62A7C-3B40-456F-A4B2-B3E19ED4080E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D193B55-28EF-409C-8573-4A4B6E4ACA4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D193B55-28EF-409C-8573-4A4B6E4ACA4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D193B55-28EF-409C-8573-4A4B6E4ACA4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D193B55-28EF-409C-8573-4A4B6E4ACA4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6F607AE-0326-4A1D-8851-7414C249EA3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6F607AE-0326-4A1D-8851-7414C249EA3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6F607AE-0326-4A1D-8851-7414C249EA3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F607AE-0326-4A1D-8851-7414C249EA3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DA62A7C-3B40-456F-A4B2-B3E19ED4080E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DA62A7C-3B40-456F-A4B2-B3E19ED4080E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DA62A7C-3B40-456F-A4B2-B3E19ED4080E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DA62A7C-3B40-456F-A4B2-B3E19ED4080E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
